@@ -5,6 +5,24 @@
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 2.7.1 (/System/Library/Frameworks/Python.framework/Versions/2.7/bin/python)" project-jdk-type="Python SDK" />
   <component name="SvnBranchConfigurationManager">
+    <option name="myConfigurationMap">
+      <map>
+        <entry key="$PROJECT_DIR$">
+          <value>
+            <SvnBranchConfiguration>
+              <option name="branchUrls">
+                <list>
+                  <option value="https://weschool.googlecode.com/svn/branches" />
+                  <option value="https://weschool.googlecode.com/svn/tags" />
+                  <option value="https://weschool.googlecode.com/svn/wiki" />
+                </list>
+              </option>
+              <option name="trunkUrl" value="https://weschool.googlecode.com/svn/trunk" />
+            </SvnBranchConfiguration>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="mySupportsUserInfoFilter" value="true" />
   </component>
 </project>
