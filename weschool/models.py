@@ -9,6 +9,14 @@ class Exam(models.Model):
     def __unicode__(self):
         return self.title
 
+class Question(models.Model):
+    content = models.CharField(max_length=200)
+    answer = models.CharField(max_length=200)
+    correct = models.BooleanField()
+
+    def __unicode__(self):
+        return self.content
+
 class Teacher(models.Model):
     name = models.CharField(max_length=100)
     username = models.CharField(max_length=100)
