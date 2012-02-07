@@ -1,7 +1,7 @@
-{% if exams_lis %}
+{% if exams_list %}
 <ul>
-    {% for exam in exams_lis %}
-    <li><a href="/weschool/{{ exams.id }}/">{{ exam.question }}</a></li>
+    {% for exam in exams_list %}
+    <li>{{ exam.question }}</li>
     {% endfor %}
 </ul>
 {% else %}
