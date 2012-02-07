@@ -1,0 +1,9 @@
+{% if exams_lis %}
+<ul>
+    {% for exam in exams_lis %}
+    <li><a href="/weschool/{{ exams.id }}/">{{ exam.question }}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No exams are available.</p>
+{% endif %}
