@@ -2,9 +2,10 @@ from django.db import models
 
 class Exam(models.Model):
     title = models.CharField(max_length=200)
-    question = models.CharField(max_length=100)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
+    course = models.ForeignKey('Course')
+    question = models.ManyToManyField('Question')
 
     def __unicode__(self):
         return self.title
@@ -28,6 +29,7 @@ class Teacher(models.Model):
 class Student(models.Model):
     name = models.CharField(max_length=100)
     username = models.CharField(max_length=100)
+    course = models.ForeignKey('Course')
 
     def __unicode__(self):
         return self.name
