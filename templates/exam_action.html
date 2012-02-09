@@ -1,0 +1,11 @@
+<ul>
+{% for question, choices in questions_list %}
+    <li>{{ question}}
+    {% for choice in choices %}
+        <ul>
+            <li>{{ choice.answer }}</li>
+        </ul>
+    {% endfor %}
+    </li>
+{% endfor %}
+<ul>
