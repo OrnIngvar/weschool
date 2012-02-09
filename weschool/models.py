@@ -5,18 +5,19 @@ class Exam(models.Model):
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
     course = models.ForeignKey('Course')
-    question = models.ManyToManyField('Question')
+#    question = models.ForeignKey('Question')
 
     def __unicode__(self):
         return self.title
 
 class Question(models.Model):
-    content = models.CharField(max_length=200)
+#    content = models.CharField(max_length=200)
     answer = models.CharField(max_length=200)
     correct = models.BooleanField()
+    exam = models.ForeignKey('Exam')
 
     def __unicode__(self):
-        return self.content
+        return self.answer
 
 class Teacher(models.Model):
     name = models.CharField(max_length=100)
