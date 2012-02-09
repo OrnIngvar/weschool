@@ -20,7 +20,7 @@ class ExamAdmin(admin.ModelAdmin):
 
 class QuestionAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None, {'fields': ['question']}),
+        (None, {'fields': ['question','exam']}),
     ]
     inlines = [ChoiceInline]
 
