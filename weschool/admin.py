@@ -20,13 +20,9 @@ class ExamAdmin(admin.ModelAdmin):
 
 class QuestionAdmin(admin.ModelAdmin):
     fieldsets = [
-
+        (None, {'fields': ['question']}),
     ]
     inlines = [ChoiceInline]
-    list_display = ('course', 'title', 'start_date', 'end_date')
-    list_filter = ['start_date']
-    search_fields = ['question']
-    date_hierarchy = 'start_date'
 
 
 class CourseAdmin(admin.ModelAdmin):
@@ -35,5 +31,5 @@ class CourseAdmin(admin.ModelAdmin):
 
 admin.site.register(Exam, ExamAdmin)
 admin.site.register(Course, CourseAdmin)
-admin.site.register(Question)
+admin.site.register(Question, QuestionAdmin)
 admin.site.register(Choice)
