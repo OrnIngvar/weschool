@@ -3,6 +3,7 @@
 {% block content %}
 
 <h1>Courses</h1>
+        <p>Courses for {{ user.username }}</p>
 {% if course_list %}
 <ul>
     {% for course in course_list %}
