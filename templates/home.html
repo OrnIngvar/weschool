@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block page_class %}home-page{% endblock %}
+
+{% block content %}
+   {# todo: Include the main content here #}
+   <h1>{% trans "WeSchool" %}</h1>
+    <a href="/login/?next=/course/">Login</a>
+   <p>{% trans We %}</p>
+{% endblock %}

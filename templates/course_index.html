@@ -1,3 +1,7 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+
 <h1>Courses</h1>
 {% if course_list %}
 <ul>
@@ -7,4 +11,7 @@
 </ul>
 {% else %}
 <p>No courses are available.</p>
+        <a href="/admin/">Set up courses</a>
 {% endif %}
+
+{% endblock %}

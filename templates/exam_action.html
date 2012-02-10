@@ -1,3 +1,7 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+
 <ul>
 {% for question, choices in questions_list %}
     <li>{{ question}}
@@ -8,4 +12,6 @@
     {% endfor %}
     </li>
 {% endfor %}
-<ul>
+</ul>
+
+{% endblock %}

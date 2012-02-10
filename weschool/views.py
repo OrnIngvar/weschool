@@ -24,3 +24,6 @@ def action(request, exam_id):
     except Course.DoesNotExist:
         raise Http404
     return render_to_response('exam_action.html', {'exam': exam, 'questions_list' : questions_list })
+
+def home_index(request):
+    return render_to_response('home.html', {'next': request})
