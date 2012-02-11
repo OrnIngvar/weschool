@@ -2,16 +2,20 @@
 {% load i18n %}
 {% block content %}
 
-<ul>
-{% for question, choices in questions_list %}
-    <li>{{ question}}
-    {% for choice in choices %}
-        <ul>
-            <li>{{ choice.answer }}</li>
-        </ul>
+{% if user.is_authenticated %}
+    <ul>
+    {% for question, choices in questions_list %}
+        <li>{{ question}}
+        {% for choice in choices %}
+            <ul>
+                <li>{{ choice.answer }}</li>
+            </ul>
+        {% endfor %}
+        </li>
     {% endfor %}
-    </li>
-{% endfor %}
-</ul>
+    </ul>
+{% else %}
+    <p>Please login to continue</p>
+{% endif %}
 
 {% endblock %}

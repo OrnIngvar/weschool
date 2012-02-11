@@ -15,6 +15,14 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
+LOGIN_URL = '/login/'
+
+# add template context preprocessors
+TEMPLATE_CONTEXT_PREPROCESSORS = (
+    "django.core.context_processors.auth",
+    "django.core.context_processors.request",
+)
+
 MANAGERS = ADMINS
 
 DATABASES = {

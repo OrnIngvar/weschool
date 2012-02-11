@@ -1,14 +1,16 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% block content %}
-
-<h1>{{ course.name }}</h1>
-<ul>
-    {% for exam in exams %}
-    <li>
-        <a href="/course/exam/{{ exam.id }}/">Start {{ exam.title }}</a>
-    </li>
-    {% endfor %}
-</ul>
-
+{% if user.is_authenticated %}
+    <h1>{{ course.name }}</h1>
+    <ul>
+        {% for exam in exams %}
+        <li>
+            <a href="/course/exam/{{ exam.id }}/">Start {{ exam.title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <a href="/login/?next=/course/">Login</a>
+{% endif %}
 {% endblock %}
