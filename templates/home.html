@@ -1,15 +1,27 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load static %}
 {% block page_class %}home-page{% endblock %}
 
 {% block content %}
+<div id="wrapper">
+    <div id="header">WeSchool</div>
+    <div id="navbar">
+        <ul>
+            <li class="currentOpenedPage">Home page	</li>
 
-   <h1>{% trans "WeSchool" %}</h1>
-    {% if user.is_authenticated %}
-        <p>Welcome {{ user.username }}!</p>
-        <a href="/course/">Open Courses list</a>
-    {% else %}
-        <a href="/login/?next=/course/">Login</a>
-    {% endif %}
-   <p>{% trans We %}</p>
+        </ul>
+    </div>
+        <div id="content">
+           <h1>{% trans "Home" %}</h1>
+            {% if user.is_authenticated %}
+                <p>Welcome {{ user.username }}!</p>
+                <a href="/course/">Open Courses list</a>
+            {% else %}
+                <p>Please login to continue</p>
+            {% endif %}
+           <p>{% trans We %}</p>
+        </div>
+    <div class="break"></div>
+</div>
 {% endblock %}
