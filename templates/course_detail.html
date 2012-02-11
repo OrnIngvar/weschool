@@ -1,16 +1,28 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% block content %}
-{% if user.is_authenticated %}
-    <h1>{{ course.name }}</h1>
-    <ul>
-        {% for exam in exams %}
-        <li>
-            <a href="/course/exam/{{ exam.id }}/">Start {{ exam.title }}</a>
-        </li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <a href="/login/?next=/course/">Login</a>
-{% endif %}
+<div id="wrapper">
+    <div id="header">WeSchool</div>
+    <div id="navbar">
+        <ul>
+            <li class="currentOpenedPage">Courses	</li>
+
+        </ul>
+    </div>
+    <div id="content">
+    {% if user.is_authenticated %}
+        <h1>{{ course.name }}</h1>
+        <ul>
+            {% for exam in exams %}
+            <li>
+                <a href="/course/exam/{{ exam.id }}/">Start {{ exam.title }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <a href="/login/?next=/course/">Login</a>
+    {% endif %}
+    </div>
+    <div class="break"></div>
+</div>
 {% endblock %}

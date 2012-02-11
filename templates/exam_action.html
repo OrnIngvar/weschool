@@ -1,7 +1,15 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% block content %}
+<div id="wrapper">
+    <div id="header">WeSchool</div>
+    <div id="navbar">
+        <ul>
+            <li class="currentOpenedPage">{{ exam.course.name }} - {{ exam.title }}</li>
 
+        </ul>
+    </div>
+    <div id="content">
 {% if user.is_authenticated %}
     <ul>
     {% for question, choices in questions_list %}
@@ -17,5 +25,7 @@
 {% else %}
     <p>Please login to continue</p>
 {% endif %}
-
+    </div>
+    <div class="break"></div>
+</div>
 {% endblock %}
