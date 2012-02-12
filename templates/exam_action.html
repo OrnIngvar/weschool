@@ -3,6 +3,8 @@
 {% block current_page %}{{ exam.course.name }} - {{ exam.title }}{% endblock %}
 {% block content %}
 <div id="content">
+    Exam progress:
+    <progress value="22" max="100"></progress>
     {% if request.user.is_authenticated %}
     <ul>
         {% for question, choices in questions_list %}
@@ -15,6 +17,7 @@
         </li>
         {% endfor %}
     </ul>
+
     {% else %}
     <p>Please login to continue</p>
     {% endif %}

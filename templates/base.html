@@ -15,8 +15,9 @@
     <meta name="author" content="{% block meta_author %}{% endblock %}" />
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/progress-polyfill.css" />
     {% block css %}{% endblock %}
-    
+
     <script src="{{ STATIC_URL }}js/libs/modernizr-2.5.2.min.js"></script>
 </head>
 
@@ -53,6 +54,7 @@
     <footer>
 
     </footer>
+
 
     {% if debug %}{% include 'includes/debug.html' %}{% endif %}
     {% block javascript_library %}

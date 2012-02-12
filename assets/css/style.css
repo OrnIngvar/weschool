@@ -360,7 +360,9 @@ a img { border: none; }
     color: #158904;
 }
 
-
+progress{
+    float: none;
+}
 
 
 
