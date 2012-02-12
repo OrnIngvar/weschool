@@ -268,10 +268,15 @@ a img { border: none; }
 }
 
 #header {
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 15px;
+    float: none;
+    margin-bottom: 5px;
     padding-bottom: 5px;
     font-size: 24px;
+}
+
+#nav{
+    font-size: 11px;
+    border-bottom: 1px solid #ddd;
 }
 
 #content {

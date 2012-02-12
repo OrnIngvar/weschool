@@ -2,18 +2,11 @@
 {% load i18n %}
 {% block page_class %}home-page{% endblock %}
 
+{% block current_page %}Home page{% endblock %}
 {% block content %}
-<div id="wrapper">
-    <div id="header">WeSchool</div>
-    <div id="navbar">
-        <ul>
-            <li class="currentOpenedPage">Home page	</li>
-
-        </ul>
-    </div>
         <div id="content">
            <h1>{% trans "Home" %}</h1>
-            {% if user.is_authenticated %}
+            {% if request.user.is_authenticated %}
                 <p>Welcome {{ user.username }}!</p>
                 <a href="/course/">Open Courses list</a>
             {% else %}

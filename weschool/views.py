@@ -4,10 +4,11 @@ from django.http import Http404
 from django.http import HttpResponseRedirect
 from django.contrib.auth import logout
 from django.template import RequestContext
+from pprint import pprint
 
 def index(request):
     course_list = Course.objects.all()
-    return render_to_response('course_index.html', {'course_list': course_list, 'user': request.user}, RequestContext(request))
+    return render_to_response('course_index.html', {'course_list': course_list}, RequestContext(request))
 
 def detail(request, course_id):
     try:
@@ -15,7 +16,7 @@ def detail(request, course_id):
         exams = course.exam_set.all()
     except Course.DoesNotExist:
         raise Http404
-    return render_to_response('course_detail.html', {'exams': exams, 'course' : course, 'user': request.user}, RequestContext(request))
+    return render_to_response('course_detail.html', {'exams': exams, 'course' : course}, RequestContext(request))
 
 def action(request, exam_id):
 
@@ -27,10 +28,12 @@ def action(request, exam_id):
             questions_list.append((question, question.choice_set.all()))
     except Course.DoesNotExist:
         raise Http404
-    return render_to_response('exam_action.html', {'exam': exam, 'questions_list' : questions_list, 'user': request.user }, RequestContext(request))
+    return render_to_response('exam_action.html', {'exam': exam, 'questions_list' : questions_list}, RequestContext(request))
 
 def home_index(request):
-    return render_to_response('home.html', {'next': request, 'user': request.user}, RequestContext(request))
+    pprint( vars(request.user))
+
+    return render_to_response('home.html', {'next': request}, RequestContext(request))
 
 def logout_page(request):
     logout(request)

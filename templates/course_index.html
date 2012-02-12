@@ -1,16 +1,9 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% block current_page %}Courses{% endblock %}
 {% block content %}
-<div id="wrapper">
-    <div id="header">WeSchool</div>
-    <div id="navbar">
-        <ul>
-            <li class="currentOpenedPage">Courses	</li>
-
-        </ul>
-    </div>
     <div id="content">
-    {% if user.is_authenticated %}
+    {% if request.user.is_authenticated %}
         <h1>Courses</h1>
                 <p>Courses for {{ user.username }}</p>
         {% if course_list %}
@@ -23,7 +16,6 @@
         <p>No courses are available.</p>
                 <a href="/admin/">Set up courses</a>
         {% endif %}
-
     {% else %}
         <p>Please login to continue</p>
     {% endif %}

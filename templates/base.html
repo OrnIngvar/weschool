@@ -28,23 +28,32 @@
     <header>
 
     </header>
-    <div id="nav">
-        <a href="/">home</a> |
-        {% if user.is_authenticated %}
-        welcome {{ user.username }}
-            (<a href="/logout">logout</a>)
-        {% else %}
-            <a href="/login/?next=/course/">login</a>
-        {% endif %}
-    </div>
+
     <div role="main">
+       <div id="wrapper">
+        <div id="header">WeSchool</div>
+        <div id="nav">
+            <a href="/">home</a> |
+            {% if user.is_authenticated %}
+            welcome {{ user.username }}
+                (<a href="/logout">logout</a>)
+            {% else %}
+                <a href="/login/?next=/course/">login</a>
+            {% endif %}
+        </div>
+        <div id="navbar">
+            <ul>
+                <li class="currentOpenedPage">{% block current_page %} {% endblock current_page %}</li>
+
+            </ul>
+        </div>
         {% block content %} {% endblock content %}
+       </div>
     </div>
     <footer>
 
     </footer>
-    
-    
+
     {% if debug %}{% include 'includes/debug.html' %}{% endif %}
     {% block javascript_library %}
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
