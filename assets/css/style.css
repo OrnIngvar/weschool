@@ -364,6 +364,11 @@ progress{
     float: none;
 }
 
+.score{
+    font-size: 10px;
+    font-weight: bold;
+}
+
 
 
 

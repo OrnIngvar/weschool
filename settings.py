@@ -6,6 +6,7 @@ import ldap
 from django_auth_ldap.config import LDAPSearch, GroupOfNamesType
 
 import logging
+from logging import StreamHandler
 
 logger = logging.getLogger('django_auth_ldap')
 logger.addHandler(logging.StreamHandler())
@@ -146,12 +147,25 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
+        'null': {
+            'level':'DEBUG',
+            'class':'django.utils.log.NullHandler',
+            },
+        'console':{
+            'level':'DEBUG',
+            'class':'logging.StreamHandler',
+        },
         'mail_admins': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler'
         }
     },
     'loggers': {
+        'django_auth_ldap': {
+          'handlers': ['console'],
+          'level': 'DEBUG',
+          'propogate': True,
+        },
         'django.request': {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
