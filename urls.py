@@ -19,6 +19,7 @@ urlpatterns = patterns('',
     url(r'^course/$', 'weschool.views.index'),
     url(r'^course/(?P<course_id>\d+)/$', 'weschool.views.detail'),
     url(r'^course/exam/(?P<exam_id>\d+)/$', 'weschool.views.action'),
+    url(r'^course/exam/(?P<exam_id>\d+)/result', 'weschool.views.result'),
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 )

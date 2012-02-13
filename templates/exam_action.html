@@ -1,26 +1,24 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block current_page %}{{ exam.course.name }} - {{ exam.title }}{% endblock %}
 {% block content %}
-<div id="content">
-    Exam progress:
-    <progress value="0" max="{{ questions_list.count }}"></progress>
-    {% if request.user.is_authenticated %}
-    <ul>
-        {% for question, choices in questions_list %}
-        <li>{{ question}}
-            {% for choice in choices %}
-            <ul>
-                <li>{{ choice.answer }}</li>
-            </ul>
-            {% endfor %}
-        </li>
-        {% endfor %}
-    </ul>
-    <p class="score">Your score is:  <meter value="0" min="0" max="10">0 out of 10</meter></p>
-    {% else %}
+<div id="wrapper">
+    <div id="header">WeSchool</div>
+    <div id="navbar">
+        <ul>
+            <li class="currentOpenedPage">{{ exam.course.name }} - {{ exam.title }}</li>
+
+        </ul>
+    </div>
+    <div id="content">
+{% if user.is_authenticated %}
+    <form action="/course/exam/{{ exam.id }}/" method="post">{% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Submit" />
+    </form>
+{% else %}
     <p>Please login to continue</p>
-    {% endif %}
+{% endif %}
+    </div>
+    <div class="break"></div>
 </div>
-<div class="break"></div>
 {% endblock %}
