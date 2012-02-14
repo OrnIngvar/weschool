@@ -3,7 +3,7 @@
 {% block current_page %}{{ exam.course.name }} - {{ exam.title }}{% endblock %}
 {% block content %}
 <div id="content">
-    {% if user.is_authenticated %}
+    {% if request.user.is_authenticated %}
     Exam progress:
     <progress value="22" max="100"></progress>
     <div>

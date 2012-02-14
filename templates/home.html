@@ -7,7 +7,7 @@
         <div id="content">
            <h1>{% trans "Home" %}</h1>
             {% if request.user.is_authenticated %}
-                <p>Welcome {{ user.username }}!</p>
+                <p>Welcome {{ request.user.username }}!</p>
                 <a href="/course/">Open Courses list</a>
             {% else %}
                 <p>Please login to continue</p>

@@ -5,7 +5,7 @@
     <div id="content">
     {% if request.user.is_authenticated %}
         <h1>Courses</h1>
-                <p>Courses for {{ user.username }}</p>
+                <p>Courses for {{ request.user.username }}</p>
         {% if course_list %}
         <ul>
             {% for course in course_list %}

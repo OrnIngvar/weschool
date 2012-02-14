@@ -1,5 +1,6 @@
 from django.contrib.formtools.wizard import FormWizard
 from django.shortcuts import render_to_response
+from django.utils.datetime_safe import date
 from weschool.models import Course, Exam, Choice, Question
 from django.http import Http404
 from django.http import HttpResponseRedirect
@@ -11,15 +12,15 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 
 def index(request):
     course_list = Course.objects.all()
-    return render_to_response('course_index.html', {'course_list': course_list, 'user': request.user}, RequestContext(request))
+    return render_to_response('course_index.html', {'course_list': course_list}, RequestContext(request))
 
 def detail(request, course_id):
     try:
         course = Course.objects.get(id=course_id)
-        exams = course.exam_set.all()
+        exams = course.exam_set.filter(end_date__gte = date.today())
     except Course.DoesNotExist:
         raise Http404
-    return render_to_response('course_detail.html', {'exams': exams, 'course' : course, 'user': request.user}, RequestContext(request))
+    return render_to_response('course_detail.html', {'exams': exams, 'course' : course}, RequestContext(request))
 
 def action(request, exam_id):
     if request.method == 'POST': # If the form has been submitted...
@@ -58,12 +59,11 @@ def action(request, exam_id):
 
     return render_to_response('exam_action.html',
             {'p_questions_list' : p_questions_list,
-             'exam': exam,
-             'user': request.user },
+             'exam': exam },
         RequestContext(request))
 
 def home_index(request):
-    return render_to_response('home.html', {'next': request, 'user': request.user}, RequestContext(request))
+    return render_to_response('home.html', {'next': request}, RequestContext(request))
 
 def logout_page(request):
     logout(request)
