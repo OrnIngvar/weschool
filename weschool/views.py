@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.contrib.formtools.wizard import FormWizard
 from django.shortcuts import render_to_response
 from django.utils.datetime_safe import date
-from weschool.models import Course, Exam, Choice, Question
+from weschool.models import Course, Exam, Choice, Question, Score
 from django.http import Http404
 from django.http import HttpResponseRedirect
 from django.contrib.auth import logout
@@ -28,13 +28,21 @@ def action(request, exam_id):
         form_data = request.POST
         exam = Exam.objects.get(id=exam_id)
         questions = exam.question_set.all()
+        correct_ans = 0.0
         for question in questions:
             answer = Choice.objects.get(id=form_data['question_'+str(question.id)])
             if answer.correct:
+                correct_ans = correct_ans + 1
                 print "correct"
             else:
                 print "false"
-        return HttpResponseRedirect('results.html') # Redirect after POST
+
+        score_object = Score(exam=exam, student=request.user, total_correct=correct_ans, total_questions=len(questions))
+        score_object.save()
+        score = (10 * correct_ans / len(questions))
+        print str(score)
+#        return HttpResponseRedirect('results.html', {'exam_id': exam_id}) # Redirect after POST
+        return render_to_response('results.html', {'user_score' : score_object , 'score' : int(score)}, RequestContext(request))
     else:
         try:
             exam = Exam.objects.get(id=exam_id)
@@ -73,7 +81,13 @@ def logout_page(request):
     return HttpResponseRedirect('/')
 
 def result(request, exam_id):
-    return render_to_response('results.html', RequestContext(request))
+    exam = Exam.objects.get(id=exam_id)
+    scores = exam.score_set
+    print scores
+    for score in scores:
+        if score.student == request.user:
+            user_score = score
+    return render_to_response('results.html', {'user_score' : user_score}, RequestContext(request))
 
 class QuestionsForm(forms.Form):
     def __init__(self,questions_list, *args, **kwargs):

@@ -13,7 +13,8 @@ class Exam(models.Model):
 
 class Score(models.Model):
     student = models.ForeignKey(User)
-    score = models.DecimalField(decimal_places=2, max_digits=4)
+    total_correct = models.IntegerField(max_length=9)
+    total_questions = models.IntegerField(max_length=9)
     exam = models.ForeignKey('Exam')
 
 
