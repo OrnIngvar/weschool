@@ -76,7 +76,7 @@ function makeMeter(meterElement) {
     } else if (meterElement.innerText) {
         meterElement.innerText = '';
     }
-    this.onchange = function() { alert(1); };
+//    this.onchange = function() { alert(1); };
 
     this.title = attr('title') != null ? attr('title') : this.value;
     this.form = getFormParent();
