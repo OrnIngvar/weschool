@@ -41,8 +41,13 @@ def action(request, exam_id):
         score_object.save()
         score = (10 * correct_ans / len(questions))
         print str(score)
+        scores = exam.score_set.all()
+        acc_score = 0
+        for single_score in scores:
+            acc_score = (acc_score + (10 * single_score.total_correct / single_score.total_questions))
 #        return HttpResponseRedirect('results.html', {'exam_id': exam_id}) # Redirect after POST
-        return render_to_response('results.html', {'user_score' : score_object , 'score' : int(score)}, RequestContext(request))
+        avg_score = acc_score / len(scores)
+        return render_to_response('results.html', {'user_score' : score , 'score' : int(score), 'avg_score' : avg_score}, RequestContext(request))
     else:
         try:
             exam = Exam.objects.get(id=exam_id)

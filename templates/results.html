@@ -3,8 +3,11 @@
 {% block current_page %}Results{% endblock %}
 {% block content %}
 <div id="content">
-    <p>Your score is:
-        <meter min="0" max="10" value="{{score}}" title="blah"></meter>
+    <p>Your score is: {{ user_score }}
+        <meter min="0" max="10" value="{{ score }}" title="blah"></meter>
+    </p>
+    <p>Average grade is: {{ avg_score }}
+        <meter min="0" max="10" value="{{ avg_score }}" title="blah"></meter>
     </p>
 </div>
 <div class="break"></div>
