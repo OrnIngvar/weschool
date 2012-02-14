@@ -43,6 +43,6 @@ admin.site.register(Question, QuestionAdmin)
 admin.site.register(Choice)
 
 #Unregister auth and sites from admin view
-admin.site.unregister(User)
-admin.site.unregister(Group)
-admin.site.unregister(Site)
+#admin.site.unregister(User)
+#admin.site.unregister(Group)
+#admin.site.unregister(Site)

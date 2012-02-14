@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.contrib.formtools.wizard import FormWizard
 from django.shortcuts import render_to_response
 from django.utils.datetime_safe import date
@@ -42,23 +43,23 @@ def action(request, exam_id):
             for question in questions:
                 questions_list.append((question, question.choice_set.all()))
             #form = QuestionsForm(questions_list)
-            paginator = Paginator((questions_list), 5)
-            try:
-                page = int(request.GET.get('page', '1'))
-            except ValueError:
-                page = 1
-            try:
-                p_questions_list = paginator.page(page)
-            except (EmptyPage, InvalidPage):
-                p_questions_list  = paginator.page(paginator.num_pages)
+#            paginator = Paginator((questions_list), 5)
+#            try:
+#                page = int(request.GET.get('page', '1'))
+#            except ValueError:
+#                page = 1
+#            try:
+#                p_questions_list = paginator.page(page)
+#            except (EmptyPage, InvalidPage):
+#                p_questions_list  = paginator.page(paginator.num_pages)
 
         except Course.DoesNotExist:
             raise Http404
 
-        print p_questions_list.object_list
+        print questions_list
 
     return render_to_response('exam_action.html',
-            {'p_questions_list' : p_questions_list,
+            {'questions_list' : questions_list,
              'exam': exam },
         RequestContext(request))
 
