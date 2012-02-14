@@ -70,7 +70,7 @@ def logout_page(request):
     return HttpResponseRedirect('/')
 
 def result(request, exam_id):
-    return render_to_response('results.html')
+    return render_to_response('results.html', RequestContext(request))
 
 class QuestionsForm(forms.Form):
     def __init__(self,questions_list, *args, **kwargs):

@@ -1,31 +1,28 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% block current_page %}{{ exam.course.name }} - {{ exam.title }}{% endblock %}
 {% block content %}
-<div id="wrapper">
-    <div id="header">WeSchool</div>
-    <div id="navbar">
-        <ul>
-            <li class="currentOpenedPage">{{ exam.course.name }} - {{ exam.title }}</li>
-
-        </ul>
-    </div>
-    <div id="content">
-{% if user.is_authenticated %}
+<div id="content">
+    {% if user.is_authenticated %}
+    Exam progress:
+    <progress value="22" max="100"></progress>
     <div>
         <form action="/course/exam/{{ exam.id }}/" method="post">{% csrf_token %}
             {% for question, choices in p_questions_list.object_list %}
             {{ question}}
-                {% for choice in choices %}
-                <ul>
-                    <li><input type="radio" id="question_{{question.id}}" value="{{choice.id}}" name="question_{{question.id}}" /> {{ choice.answer }}</li>
-                </ul>
-                {% endfor %}
+            {% for choice in choices %}
+            <ul>
+                <li><input type="radio" id="question_{{question.id}}" value="{{choice.id}}"
+                           name="question_{{question.id}}"/> {{ choice.answer }}
+                </li>
+            </ul>
             {% endfor %}
-        <div class="pagination">
+            {% endfor %}
+            <div class="pagination">
         <span class="step-links">
         {% if not p_questions_list.has_next %}
-            <p></p><input type="submit" value="Submit" /></p>
-        {% endif %}
+            <p></p><input type="submit" value="Submit"/></p>
+            {% endif %}
 
         {% if p_questions_list.has_previous %}
             <a href="?page={{ p_questions_list.previous_page_number }}">previous</a>
@@ -39,13 +36,15 @@
             <a href="?page={{p_questions_list.next_page_number }}">next</a>
         {% endif %}
         </span>
-        </div>
+            </div>
         </form>
     </div>
-{% else %}
+    <p>Your score is:
+        <meter min="0" max="10">2 out of 10</meter>
+    </p>
+    {% else %}
     <p>Please login to continue</p>
-{% endif %}
-    </div>
-    <div class="break"></div>
+    {% endif %}
 </div>
+<div class="break"></div>
 {% endblock %}
