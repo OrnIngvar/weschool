@@ -11,10 +11,37 @@
     </div>
     <div id="content">
 {% if user.is_authenticated %}
-    <form action="/course/exam/{{ exam.id }}/" method="post">{% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Submit" />
-    </form>
+    <div>
+        <form action="/course/exam/{{ exam.id }}/" method="post">{% csrf_token %}
+            {% for question, choices in p_questions_list.object_list %}
+            {{ question}}
+                {% for choice in choices %}
+                <ul>
+                    <li><input type="radio" id="question_{{question.id}}" value="{{choice.id}}" name="question_{{question.id}}" /> {{ choice.answer }}</li>
+                </ul>
+                {% endfor %}
+            {% endfor %}
+        <div class="pagination">
+        <span class="step-links">
+        {% if not p_questions_list.has_next %}
+            <p></p><input type="submit" value="Submit" /></p>
+        {% endif %}
+
+        {% if p_questions_list.has_previous %}
+            <a href="?page={{ p_questions_list.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ p_questions_list.number }} of {{ p_questions_list.paginator.num_pages }}.
+        </span>
+
+        {% if p_questions_list.has_next %}
+            <a href="?page={{p_questions_list.next_page_number }}">next</a>
+        {% endif %}
+        </span>
+        </div>
+        </form>
+    </div>
 {% else %}
     <p>Please login to continue</p>
 {% endif %}

@@ -1,3 +1,4 @@
+from django.contrib.formtools.wizard import FormWizard
 from django.shortcuts import render_to_response
 from weschool.models import Course, Exam, Choice, Question
 from django.http import Http404
@@ -6,6 +7,7 @@ from django.contrib.auth import logout
 from django.template import RequestContext
 from django.forms.widgets import RadioSelect
 from django import forms
+from django.core.paginator import Paginator, InvalidPage, EmptyPage
 
 def index(request):
     course_list = Course.objects.all()
@@ -38,16 +40,25 @@ def action(request, exam_id):
             questions_list = []
             for question in questions:
                 questions_list.append((question, question.choice_set.all()))
+            #form = QuestionsForm(questions_list)
+            paginator = Paginator((questions_list), 5)
+            try:
+                page = int(request.GET.get('page', '1'))
+            except ValueError:
+                page = 1
+            try:
+                p_questions_list = paginator.page(page)
+            except (EmptyPage, InvalidPage):
+                p_questions_list  = paginator.page(paginator.num_pages)
 
-            form = QuestionsForm(questions_list)
         except Course.DoesNotExist:
             raise Http404
-    return render_to_response('exam_action.html', {'exam': exam, 'questions_list' : questions_list, 'user': request.user }, RequestContext(request))
+
+        print p_questions_list.object_list
 
     return render_to_response('exam_action.html',
-            {'form' : form,
+            {'p_questions_list' : p_questions_list,
              'exam': exam,
-             'questions_list' : questions_list,
              'user': request.user },
         RequestContext(request))
 
