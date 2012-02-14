@@ -4,46 +4,28 @@
 {% block content %}
 <div id="content">
     {% if request.user.is_authenticated %}
-    Exam progress:
-    <progress value="22" max="100"></progress>
+    <div id="progress"></div>
+
     <div>
-        <form action="/course/exam/{{ exam.id }}/" method="post">{% csrf_token %}
+        <form action="/course/exam/{{ exam.id }}/" method="post" onsubmit="return validateForm();"
+              name="exam_form">{% csrf_token %}
             {% for question, choices in questions_list %}
-            {{ question}}
-            {% for choice in choices %}
-            <ul>
-                <li><input type="radio" id="question_{{question.id}}" value="{{choice.id}}"
-                           name="question_{{question.id}}"/> {{ choice.answer }}
-                </li>
-            </ul>
+              <div class="question_div">  {{ question}}
+                    {% for choice in choices %}
+                    <ul>
+                        <li><input type="radio" id="question_{{question.id}}" value="{{choice.id}}"
+                           name="question_{{question.id}}" onclick="updateProgress( '{{ question_length }}' );" /> {{ choice.answer }}
+                      </li>
+                     </ul>
+
             {% endfor %}
+              </div>
             {% endfor %}
-            
-            <!--<div class="pagination">-->
-        <!--<span class="step-links">-->
-        <!--{% if not p_questions_list.has_next %}-->
-            <!--<p></p><input type="submit" value="Submit"/></p>-->
-            <!--{% endif %}-->
 
-        <!--{% if p_questions_list.has_previous %}-->
-            <!--<a href="?page={{ p_questions_list.previous_page_number }}">previous</a>-->
-        <!--{% endif %}-->
-
-        <!--<span class="current">-->
-            <!--Page {{ p_questions_list.number }} of {{ p_questions_list.paginator.num_pages }}.-->
-        <!--</span>-->
-
-        <!--{% if p_questions_list.has_next %}-->
-            <!--<a href="?page={{p_questions_list.next_page_number }}">next</a>-->
-        <!--{% endif %}-->
-        <!--</span>-->
-            <!--</div>-->
             <p></p><input type="submit" value="Submit"/></p>
         </form>
     </div>
-    <p>Your score is:
-        <meter min="0" max="10">2 out of 10</meter>
-    </p>
+
     {% else %}
     <p>Please login to continue</p>
     {% endif %}

@@ -42,6 +42,7 @@ def action(request, exam_id):
             questions_list = []
             for question in questions:
                 questions_list.append((question, question.choice_set.all()))
+                question_length = len(questions_list)
             #form = QuestionsForm(questions_list)
 #            paginator = Paginator((questions_list), 5)
 #            try:
@@ -60,6 +61,7 @@ def action(request, exam_id):
 
     return render_to_response('exam_action.html',
             {'questions_list' : questions_list,
+             'question_length' : question_length,
              'exam': exam },
         RequestContext(request))
 
